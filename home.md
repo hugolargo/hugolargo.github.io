@@ -1,7 +1,7 @@
 ---
 layout: home
 title: "Portfolio"
-permalink: /home/
+permalink: /portfolio/
 ---
 
 Projects:
