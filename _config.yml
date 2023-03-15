@@ -29,7 +29,6 @@ domain: hugolargo.github.io
 domain: https://hugolargo.github.io/projects/slides.html#/music-of-the-masses
 domain: www.web.de
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
 github_username:  hugolargo
 
 # Build settings
