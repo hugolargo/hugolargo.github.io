@@ -4,7 +4,7 @@ title: CV
 permalink: /cv/
 ---
 
-<object data="test_cv.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="test_cv.pdf">
+<object data="https://hugolargo.github.io/test_cv.pdf" type="application/pdf" width="100%" height="100%">
+    <embed src="https://hugolargo.github.io/test_cv.pdf">
     </embed>
 </object>
