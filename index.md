@@ -1,6 +1,6 @@
 ---
 layout: home
-title: "Michael Döringer - Portfolio"
+title: "Portfolio"
 permalink: /home/
 ---
 
