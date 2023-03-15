@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>slides</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="music-of-the-masses" class="slide level1">
+<h1>Music of the Masses</h1>
+<p><font color="#1DB954">Finding the glitches in Spotify’s Top
+200</font></p>
+<h1 style="font-size:1.5vw">
+Michael Döringer
+</h1>
+<h1 style="font-size:1.5vw">
+Cardamon Loops | Data Analytics | Spiced Academy
+</h1>
+</section>
+<section class="slide level1">
+
+<h2 id="table-of-content"><font color="#1DB954">Table of
+content</font></h2>
+<ul>
+<li>Intro: the data and the significance of Spotify’s charts</li>
+<li>General ananlysis: popular music around the world</li>
+<li>Non-contemporary incidents: spotting old songs in the charts</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h2 id="data-structure"><font color="#1DB954">Data structure</font></h2>
+<figure>
+<img data-src="df_for_presentation.jpg"
+alt="5.212.985 rows x 13 columns" />
+<figcaption aria-hidden="true">5.212.985 rows x 13 columns</figcaption>
+</figure>
+<p>
+</p>
+<p>The 200 most streamed songs for 70 countries for each week since 2013
++ the global numbers</p>
+<ul>
+<li>Artist name + song title</li>
+<li>Weekly plays</li>
+<li>Chart date</li>
+<li>Spotify track ID –&gt; Release date</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<figure>
+<img data-src="plots/song%20bubbles.svg"
+alt="The most popular songs worldwide" />
+<figcaption aria-hidden="true">The most popular songs
+worldwide</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<figure>
+<img data-src="plots/artist%20name%20cloud.svg"
+alt="The most popular artists worldwide" />
+<figcaption aria-hidden="true">The most popular artists
+worldwide</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<figure>
+<img data-src="plots/artist%20world%20map.svg"
+alt="Favorite artist of each country" />
+<figcaption aria-hidden="true">Favorite artist of each
+country</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<h2 id="finding-old-songs"><font color="#1DB954">Finding old
+songs</font></h2>
+<ul>
+<li>looking at the global charts for worldwide trends</li>
+<li>adding more data from Spotify Web API: release dates for each
+song</li>
+<li>filterting the data for release years before 2010</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h2 id="some-statistics"><font color="#1DB954">Some
+statistics</font></h2>
+<p align="left">
+Global Charts 2013-2022:
+</p>
+<ul>
+<li><font color="#1DB954">86.295</font> entries</li>
+<li><font color="#1DB954">5.984</font> unique songs</li>
+<li>songs from before 2010: <font color="#1DB954">188</font> unique
+songs</li>
+<li>relation: <font color="#1DB954">3.1 %</font></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<figure>
+<img data-src="plots/Weekly%20old%20songs%20entering%20charts.svg"
+alt="Old songs entering the weekly charts" />
+<figcaption aria-hidden="true">Old songs entering the weekly
+charts</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<ul>
+<li><p>35 unique song titles contain the word „Christmas“: 2.6 %
+left</p></li>
+<li><p>99 unique songs charting in December: 1.5 % left</p></li>
+<li><p>the truth lies in between: only
+<font color="#1DB954">2.6-1.5%</font> of Spotify’s Top 200 are
+older/non-contemporary/non-christmas songs</p></li>
+</ul>
+<p><strong><font color="#1DB954">Let’s find out which songs these are
+and why they suddenly rise in global popularity!</font></strong></p>
+</section>
+<section class="slide level1">
+
+<h2 id="old-songs-with-10m-streams"><font color="#1DB954">Old songs with
+10+M streams</font></h2>
+<style scoped>
+table {
+  font-size: 25px;
+}
+</style>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Chart appearance</strong></th>
+<th style="text-align: center;"><strong>Artist/Song</strong></th>
+<th style="text-align: center;"><strong>Release year</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">2017</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">2000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2017</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">2003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2019</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">1975</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2020</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">1977</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2022</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">1985</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2022</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">1986</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2022</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2022</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">1999</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2022</td>
+<td style="text-align: center;">???</td>
+<td style="text-align: center;">1995</td>
+</tr>
+</tbody>
+</table>
+<p>…</p>
+</section>
+<section class="slide level1">
+
+<figure>
+<img data-src="plots/Kate%20Bush/Dashboard%20-%20Kate%20Bush.svg"
+alt="Kate Bush - Running Up That Hill" />
+<figcaption aria-hidden="true">Kate Bush - Running Up That
+Hill</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<p>Featured in “Stranger Things”</p>
+<iframe data-autoplay width="100%" height="600" src="https://www.youtube.com/embed/PXtOGS3E0vo">
+</iframe>
+</section>
+<section class="slide level1">
+
+<figure>
+<img
+data-src="plots/Fleetwood%20Mac/Dashboard%20-%20Fleetwood%20Mac.svg"
+alt="Fleetwood Mac - Dreams" />
+<figcaption aria-hidden="true">Fleetwood Mac - Dreams</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<p>Viral on TikTok</p>
+<iframe data-autoplay width="100%" height="600" src="https://www.youtube.com/embed/OtzVKUCZE5w">
+</iframe>
+</section>
+</section>
+<section class="slide level1">
+
+<figure>
+<img data-src="plots/Linkin%20Park/Dashboard%20-%20Linkin%20Park.svg"
+alt="Linkin Park" />
+<figcaption aria-hidden="true">Linkin Park</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<p>Singer died</p>
+<p><img src="plots/Linkin Park/linkin_park.jpg" alt="Chester Bennington"></p>
+</section>
+<section class="slide level1">
+
+<figure>
+<img
+data-src="plots/Eminem%20+%20Dr.%20Dre/Dashboard%20-%20Eminem%20&amp;%20Dr.%20Dre.svg"
+alt="Dr. Dre, Eminem, Snoop Dogg…" />
+<figcaption aria-hidden="true">Dr. Dre, Eminem, Snoop Dogg…</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<p>Superbowl Halftime Show Performance</p>
+<iframe data-autoplay width="100%" height="600" src="https://www.youtube.com/embed/GTHUoETtpuc">
+</iframe>
+</section>
+<section class="slide level1">
+
+<h2 id="thank-you-for-listening"><font color="#1DB954">Thank you for
+listening</font></h2>
+<strong>Tech used:</strong>
+<p>
+</p>
+<ul>
+<li>Python</li>
+<li>Pandas</li>
+<li>Plotly</li>
+<li>spotipy</li>
+<li>Tableau</li>
+<li>Pandoc</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
